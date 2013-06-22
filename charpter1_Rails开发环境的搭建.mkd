@@ -20,7 +20,9 @@ RVM 是干什么的这里就不解释了，后面你将会慢慢搞明白。执�
 
 首先替换 Ruby 下载地址到国内淘宝镜像服务器，这样可以提高速度，同时防止一些“敏感话题”……
 
-	sed -i .bak 's!ftp.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' $rvm_path/config/db
+	sed -i .bak 's!ftp.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' 
+
+	rvm_path/config/db
 
 安装 readline 包
 	
@@ -42,7 +44,75 @@ RVM 装好以后，需要执行下面的命令将指定版本的 Ruby 设置为�
 
 	gem install bundler rails
 
+####6.安装MySQL
+
+为了方便，直接在终端输入
+
+	sudo apt-get install mysql-server
+
+设置好密码之类的东西。
+
 ##Windows系统
-你还是放弃吧，省的麻烦……要是真的想玩Windows下的Rails可以考虑Rails Installer，是一个一键安装Rails的项目。慎重……
-##Mac 系统
-高富帅的系统真心没有玩过……但是总归实验过……
+你还是放弃吧，省的麻烦……要是真的想玩Windows下的Rails可以考虑`Instant Rails`，这是一个一键安装Rails的项目，包含有 Ruby, Rails, MySQL 和 Apache，唯一需要注意的是<strong>安装路径不能出现空格<strong> 。
+
+##Mac OS X 系统
+###1.小白法
+在Mac OS X 上安装Rails最简单的方法是使用Locomotive。缺点是它默认使用的数据库是SQLite而且以Lighttpd而非Apache为服务器（但是有什么关系呢^_^）。
+
+从<http://sourceforge.net/project/showfiles.php?group_id=146941>上下载Locomotive，或者直接点击<http://sourceforge.net/projects/locomotive/files/latest/download?source=files>双击安装。
+
+安装MySQL（自行谷歌……）。
+
+###2.使用终端
+黄涛师兄说：“给我一个终端，我们创造整个世界。”
+我还没有到这样的境界。
+##几点说明
+
+###1.关于数据库
+我们使用的是MySQL，但是Rails同时也支持以下数据库：
+
+* DB2
+* Firebird
+* Oracle
+* PostgreSQL
+* SQLite
+* SQL Server
+
+由于Rails使用的是Active Record的方式，在这些数据库的基础上建立了统一的接口，所以只需要相应的配置就可以用同样的方法使用。配置十分简单，在下一章中我们可以看到。
+
+###2.
+
+Ok，第一章就这样了。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

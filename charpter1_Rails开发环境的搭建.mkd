@@ -18,12 +18,6 @@ RVM 是干什么的这里就不解释了，后面你将会慢慢搞明白。执�
 
 ####3.用 RVM 安装 Ruby 环境
 
-首先替换 Ruby 下载地址到国内淘宝镜像服务器，这样可以提高速度，同时防止一些“敏感话题”……
-
-	sed -i .bak 's!ftp.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' 
-
-	rvm_path/config/db
-
 安装 readline 包
 	
 	rvm pkg install readline

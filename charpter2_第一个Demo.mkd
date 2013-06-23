@@ -1,0 +1,67 @@
+<center>二. 第一个Demo<center>
+====
+_**这一章会通过一个博客的例子，说明Rails的MVC模型、数据传递规则、视图构建模式以及数据库的使用方法，在最后会介绍Rails的session支持方案。我们希望此时你的脑海中关于Rails还是一片空白……**_
+
+_**开发环境：Ubuntu 12.04 LTS**_
+
+_**Ruby版本：1.9.3**_
+
+_**Rails版本：3.2.13**_
+
+_**数据库：MySQL**_
+
+##1. 建立项目
+进入工作目录（任意的一个目录），终端下输入
+
+	rails new myblog
+
+等待一段时间生成项目目录。
+
+进入你的项目目录
+
+打开根目录下下的Gemfile文件，将
+
+	gem 'sqlite3'
+
+一句改为
+	gem 'mysql2'
+	gem 'therubyracer'
+
+*解释1：Rails的一大特点就是依赖于众多的gem包工作，这里的gem包可以理解为C++和java中的库*
+
+打开/config目录下的database.yml文件，删除product和test下的设置，只保development，它应该是这个样子：
+
+	development:
+	  adapter: mysql2
+	  database: myblog
+	  user: root
+	  password: ****
+	  encoding: utf8
+	  pool: 5
+	  timeout: 5000
+
+其中database的名称最好和项目名一致（不需要提前创建，Rails会帮我们创建）。
+
+在根目录下分别执行以下三条命令
+
+	bundle install
+	rake db:create
+	rails server
+
+搞定之后打开浏览器，在地址栏输入`localhost:3000`，你如果看到下面这样的网页，那么恭喜，你已经成功运行了第一个Rails网站，虽然它现在有点弱小，但总会强大起来的。
+![alert aaa](./charpter2_default_index.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

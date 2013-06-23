@@ -47,7 +47,7 @@ RVM 装好以后，需要执行下面的命令将指定版本的 Ruby 设置为�
 设置好密码之类的东西。
 
 ##Windows系统
-你还是放弃吧，省的麻烦……要是真的想玩Windows下的Rails可以考虑`Instant Rails`，这是一个一键安装Rails的项目，包含有 Ruby, Rails, MySQL 和 Apache，唯一需要注意的是<strong>安装路径不能出现空格<strong> 。
+你还是放弃吧，省的麻烦……要是真的想玩Windows下的Rails可以考虑`Instant Rails`，下载地址是<http://http://rubyforge.org/frs/?group_id=904>,这是一个一键安装Rails的项目，包含有 Ruby, Rails, MySQL 和 Apache，唯一需要注意的是<strong>安装路径不能出现空格<strong> 。
 
 ##Mac OS X 系统
 ###1.小白法

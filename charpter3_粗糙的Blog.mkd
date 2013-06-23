@@ -7,5 +7,54 @@
 * *了解Rails使用的MVC模型，数据传递方式*
 * *了解Active Record的使用方法*
 * *了解Scaffold的用法*
+* *路由器规则
 * *实现日志相关功能*
 * *学会使用api，学会读文档*
+
+##1. myblog 整体框架
+让我们来看看我们都需要哪些功能——
+
+* 日志（article）：每篇日志都有题目（title）、内容（content）、唯一的分类（category）、若干标签（label）。
+* 用户（user）：每个用户有自己的用户名（name）、密码（password）、若干日志（article）
+* 标签（label）：
+
+##2. MVC模型
+所谓MVC模型，也就是Model-View-Controller模型。是为了简易开发而约定的一套开发规范，被Rails作为其框架基础。MVC模型如下图所示：
+
+![](./charpter3_MVC.png)
+
+Model（模型）：模型可以理解为对于数据的定义，以及数据的关系。
+
+View（视图）：View负责将数据以可视化的方式呈现给用户，
+
+Controller（控制器）：Controller中是对于Model行为的定义
+##3. Active Record简介
+Active Record可以支持的变量类型有以下几种。
+
+* binary
+* boolean
+* date
+* datetime
+* decimal
+* float
+* integer
+* primary_key
+* string
+* text
+* time
+* timestamp
+
+##4. 开始吧少年
+进入项目文件夹根目录，依次输入以下两条语句
+
+	rails generate scaffold article name:string content:text
+	rake db:migrate
+
+在浏览器中输入`localhost:3000/articles/new`，你会看到一个article的编辑界面，如下图：
+
+![](./charpter3_article_new)
+随便输入一些内容，
+
+##附 Rails路由器入门
+
+##学会使用api，学会读文档

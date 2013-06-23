@@ -1,0 +1,46 @@
+README
+----
+Welcome to the Rails--Begining-and-Summary wiki!
+*刚刚用Rails做完一个大作业，对Rails有了一种豁然开朗的感觉，觉得现在好多的教程都没有抓住重点，当然更重要的是为了自己可以真正理解。所以写了一个总结和起步类的东西。求不喷~求共同进步^_^*
+
+下面是整体的框架：
+
+##charpter1 Rails安装
+* Linux（Ubuntu）
+* Windows
+* Mac OS X
+
+##charpter2 一个简单的Demo
+* Rails起步
+* 运行前的配置
+* 一些入门性质的解释
+
+##charpter3 粗糙的Blog
+* 构建myblog项目的大体框架
+* 了解Rails使用的MVC模型，数据传递方式
+* 了解Active Record的使用方法
+* 了解Scaffold的用法
+* 实现日志相关功能
+* 学会使用api，学会读文档
+
+##charpter4 追求美的Blog
+* 开始使用CSS框架bootstrap
+* 一些矛盾的解决，本质的探究，如link_to生成的代码
+
+##charpter5 功能填充
+* 添加类别、标签
+* 添加用户登录，了解session
+* 一对多数据库模型
+* 添加搜索、收藏
+* 重要的回顾，不一样的发现
+
+##charpter5 外部程序的引入
+* Markdown编辑器的引入。
+* 播放器的引入
+
+##charpter6 安全问题
+
+##附录
+* rake 命令大全
+* Active Record接口函数大全
+* 数据库操作（find函数）

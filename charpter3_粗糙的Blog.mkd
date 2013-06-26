@@ -10,7 +10,7 @@
 * *路由器规则
 * *实现日志相关功能*
 * *学会使用api，学会读文档*
-
+####（从现在开始，如果没有特殊说明，那么所有的路径都是在myblog这个项目路径下的，例如，`/app/controller`的意思就是`**/**/myblog/app/controller`。）
 ##1. myblog 整体框架
 让我们来看看我们都需要哪些功能——
 
@@ -28,7 +28,24 @@ Model（模型）：模型可以理解为对于数据的定义，以及数据的
 View（视图）：View负责将数据以可视化的方式呈现给用户，
 
 Controller（控制器）：Controller中是对于Model行为的定义
+
+MVC模型构建的网站其运作过程的过程如下：
+
+>1) 浏览器将用户输入的网址或者某一个链接到的网址发送给我们的网站，网站通过解析可以“理解”这段网址的意思，解析的规则称之为route规则（一个个的网址就是一个个的route）。例如对于网址<http://www.myblog.com/articles/new>，首先浏览器会解析<http://www.myblog.com>在远程找到这个网址的主机，并将`/articles/new`发送给该主机。
+
+>2) 紧接着Rails开始分析route——articles对应着一个控制器（controller），然后找到该controller下的new动作（action），这个action的默认方法是创建一个新的article，所以controller会继续找到对应的模型（model），通过一些数据库函数创建我们需要的对象（一个article对象），接着创建对应的视图以便呈现给用户（输入、查看或保存），然后Rails将视图翻译成html页面交给浏览器。
+
+>3) 浏览器显示html页面。
+
 ##3. Active Record简介
+Active Record可以理解为一种在众多数据库之上建立的统一查询方式。它把数据库中的一个表对应成一个类，把每一条记录对应成该类的一个实例。同时这个类中有若干类方法，可以提供如查询等众多功能。例如，如果存在articles这个表，它有title、content两个属性，那么我们可以有这样的语句
+
+	myArticle=Article.find(1)#
+	myTitle=myArticle.title#
+	myContent=myArticle.content#
+
+同时，使用Active Record将使得一对多关系的查询更加方便，我们会在之后讨论。
+
 Active Record可以支持的变量类型有以下几种。
 
 * binary
@@ -53,8 +70,52 @@ Active Record可以支持的变量类型有以下几种。
 在浏览器中输入`localhost:3000/articles/new`，你会看到一个article的编辑界面，如下图：
 
 ![](./charpter3_article_new)
-随便输入一些内容，
 
+随便输入一些内容，点击保存，OK，你已经可以看到你的第一篇日志了，如下图：
+
+![](./charpter3_show_first_article)
+
+是不是有一种创世的感觉？
+
+##5. 这才是开始。
+
+我们也许感到了一丝沮丧，毕竟我们还是一点主动权都没有，而且并没有学到什么实在的东西。我们先看看我们刚刚都做了什么。
+
+进入`/app`，你会看到这样的几个文件夹：
+
+	assets  controllers  helpers  mailers  models  views
+
+* assetes：存放着与前端显示有关的相关文件，我们将在下一章用到。
+* controllers：存放着项目所用到的所有的controller。
+* helpers：其中存放着若干辅助类，用于辅助model的功能（只需要在model中include一下即可），只有一个功能应该放在model里还是在helper中，我们会在以后的以后讨论，暂时不去管它。
+* mailers：至今还没有学到这个文件夹的用途，囧……
+* models：存放所有的model
+* views：存放所有的view
+
+进入`congtroller`文件夹，可以看到两个文件`application_controller.rb  articles_controller.rb`，我们之看`articles_controller.rb`。
+
+首先我们需要回顾一下我们刚刚干了什么，我们执行了这样两条语句
+
+	rails generate scaffold article name:string content:text
+	rake db:migrate
+
+这是两条Rails自带命令，它们的意思分别是
+
+* 建立一个模型article，并依据Rails既定的模版建立相应的controller和view。
+* 进行数据迁移。
+
+迁移的命令我们以后再讨论。
+
+什么叫既定模版？Rails的设计者们认为，对于每一个模型（你可以理解为类，也可以理解为一类实体在数据库中的映射）都应该有以下的功能：创建、销毁、修改、展示实体，以及展示所有此模型的实体。这些功能对应在controller的代码中就是这些方法：
+
+* index：展示此模型对应的所有的实体，如果此模型是article，那么就会展示所有的article。
+* show：只展示此模型对应的某一个特定的（就是用户指定的）实体。
+* new：**准备**创建一个新的实体。
+* edit：**准备**重新编辑某一特定的实体。
+* create：*真正*在*数据库*中创建一个新的实体。
+* update：*真正*在*数据库*中更新某一特定的实体。
+* destroy：在数据库中删除某一特定的实体。
+    
 ##附 Rails路由器入门
-
+<http://guides.ruby-china.org/routing.html>
 ##学会使用api，学会读文档

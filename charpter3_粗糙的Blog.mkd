@@ -29,13 +29,17 @@ View（视图）：View负责将数据以可视化的方式呈现给用户，
 
 Controller（控制器）：Controller中是对于Model行为的定义
 
-MVC模型构建的网站其运作过程的过程如下：
+####MVC模型构建的网站其运作过程的过程如下：
 
 >1) 浏览器将用户输入的网址或者某一个链接到的网址发送给我们的网站，网站通过解析可以“理解”这段网址的意思，解析的规则称之为route规则（一个个的网址就是一个个的route）。例如对于网址<http://www.myblog.com/articles/new>，首先浏览器会解析<http://www.myblog.com>在远程找到这个网址的主机，并将`/articles/new`发送给该主机。
 
->2) 紧接着Rails开始分析route——articles对应着一个控制器（controller），然后找到该controller下的new动作（action），这个action的默认方法是创建一个新的article，所以controller会继续找到对应的模型（model），通过一些数据库函数创建我们需要的对象（一个article对象），接着创建对应的视图以便呈现给用户（输入、查看或保存），然后Rails将视图翻译成html页面交给浏览器。
+>2) 紧接着Rails开始分析route——articles对应着一个控制器（controller），然后找到该controller下的new动作（action），这个action的默认方法是创建一个新的article，所以controller会继续找到对应的模型（model），通过一些数据库函数创建我们需要的对象（一个article对象），接着根据已经写好的视图（包含有Rails语句）创建对应的真正的视图（不含Rails代码）以便呈现给用户（输入、查看或保存），然后Rails将视图翻译成html页面交给浏览器。
 
 >3) 浏览器显示html页面。
+
+####对应规则
+
+我们举个例子，比如我们的model为“”
 
 ##3. Active Record简介
 Active Record可以理解为一种在众多数据库之上建立的统一查询方式。它把数据库中的一个表对应成一个类，把每一条记录对应成该类的一个实例。同时这个类中有若干类方法，可以提供如查询等众多功能。例如，如果存在articles这个表，它有title、content两个属性，那么我们可以有这样的语句
@@ -106,7 +110,7 @@ Active Record可以支持的变量类型有以下几种。
 
 迁移的命令我们以后再讨论。
 
-什么叫既定模版？Rails的设计者们认为，对于每一个模型（你可以理解为类，也可以理解为一类实体在数据库中的映射）都应该有以下的功能：创建、销毁、修改、展示实体，以及展示所有此模型的实体。这些功能对应在controller的代码中就是这些方法：
+什么叫既定模版？Rails的设计者们认为，对于每一个模型（你可以理解为类，也可以理解为一类实体在数据库中的映射）都应该有以下的功能：创建、销毁、修改、展示实体，以及展示所有此模型的实体。这些功能对应在controller的代码中就是这些方法（请打开`articles_controller.rb`）：
 
 * index：展示此模型对应的所有的实体，如果此模型是article，那么就会展示所有的article。
 * show：只展示此模型对应的某一个特定的（就是用户指定的）实体。
@@ -115,6 +119,12 @@ Active Record可以支持的变量类型有以下几种。
 * create：*真正*在*数据库*中创建一个新的实体。
 * update：*真正*在*数据库*中更新某一特定的实体。
 * destroy：在数据库中删除某一特定的实体。
+
+我们拿index和update函数来说明Rails数据流动的过程。
+
+####index函数
+
+我们注意到index函数的第一行：`@articles = Article.all`。学过Ruby的同学可能很熟悉，`@`符号是Rails全局变量的标志（类变量的标志是`@@`）。在Rails中，“全局”的范围除了整个def所定义的函数之外，还包括对应的view，也就是说，
     
 ##附 Rails路由器入门
 <http://guides.ruby-china.org/routing.html>

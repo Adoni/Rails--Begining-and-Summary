@@ -39,7 +39,13 @@ Controller（控制器）：Controller中是对于Model行为的定义
 
 ####对应规则
 
-我们举个例子，比如我们的model为“”
+Rails中，model、controller、view之间的命名规则是特定的，举个例子来说
+
+我们举个例子，比如我们的model为`article`，并且其中有一个`index`的方法，那么，我们可能以下部件（请注意其名称的单复数）：
+* MySQL的database中对应的table：`articles`
+* `/app/controllers`中的Controller：`articles_controller.rb`
+* `/app/views`中：名为`articles`的文件夹，其中存放着各个方法对应的视图，当然这些视图代码中包含有Rails代码。具体我们会在一会儿介绍。
+* `/app/views/articles`中：若干`.html.erb`文件，分别对应`articles_controller.rb`中对应名称的方法，比如index方法会被对应成`index.html.erb`文件。
 
 ##3. Active Record简介
 Active Record可以理解为一种在众多数据库之上建立的统一查询方式。它把数据库中的一个表对应成一个类，把每一条记录对应成该类的一个实例。同时这个类中有若干类方法，可以提供如查询等众多功能。例如，如果存在articles这个表，它有title、content两个属性，那么我们可以有这样的语句
@@ -73,11 +79,11 @@ Active Record可以支持的变量类型有以下几种。
 
 在浏览器中输入`localhost:3000/articles/new`，你会看到一个article的编辑界面，如下图：
 
-![](./charpter3_article_new)
+![](./charpter3_article_new.png)
 
 随便输入一些内容，点击保存，OK，你已经可以看到你的第一篇日志了，如下图：
 
-![](./charpter3_show_first_article)
+![](./charpter3_show_first_article.png)
 
 是不是有一种创世的感觉？
 
@@ -103,7 +109,7 @@ Active Record可以支持的变量类型有以下几种。
 	rails generate scaffold article name:string content:text
 	rake db:migrate
 
-这是两条Rails自带命令，它们的意思分别是
+这是两条Rails自带命令，它们的意思分别是：
 
 * 建立一个模型article，并依据Rails既定的模版建立相应的controller和view。
 * 进行数据迁移。
@@ -124,8 +130,47 @@ Active Record可以支持的变量类型有以下几种。
 
 ####index函数
 
-我们注意到index函数的第一行：`@articles = Article.all`。学过Ruby的同学可能很熟悉，`@`符号是Rails全局变量的标志（类变量的标志是`@@`）。在Rails中，“全局”的范围除了整个def所定义的函数之外，还包括对应的view，也就是说，
+我们注意到index函数的第一行：`@articles = Article.all`。学过Ruby的同学可能很熟悉，`@`符号是Rails全局变量的标志（类变量的标志是`@@`）。在Rails中，“全局”的范围除了整个def所定义的函数之外，还包括对应的view，也就是说，在其对应的`/app/views/articles/index.html.erb`中也可以使用，其中的代码可能是这个样子：
+
+	<h1>Listing articles</h1>
+
+	<table>
+	  <tr>
+	    <th>Name</th>
+	    <th>Content</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+
+	<% @articles.each do |article| %>
+	  <tr>
+	    <td><%= article.name %></td>
+	    <td><%= article.content %></td>
+	    <td><%= link_to 'Show', article %></td>
+	    <td><%= link_to 'Edit', edit_article_path(article) %></td>
+	    <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+	<% end %>
+	</table>
+
+	<br />
+
+	<%= link_to 'New Article', new_article_path %>
     
+首先是一个标题。然后是一个表格，表格的第一行是article的两个属性，之后的每一行分别是articles中每一篇article的属性值，你看到的界面也许是这样的：
+
+![](./charpter3_index.png)
+
+需要注意的是这两句代码以及其中间的内容：
+
+	<% @articles.each do |article| %>
+	<% end %>
+
+`<%%>`是在.html.erb文件中嵌入Rails代码的标志，在`<%`和`%>`中的代码会通过Ruby去解释执行，并且可以在其中使用在controller中声明的全局变量。我们在上面提到的`@articles`就是在这里使用的。至于`@articles.each do |article|`这种用法属于Ruby的语法范围，可以自行谷歌，几分钟就可以学会。
+
+需要解释的是`<%%>`和`<%=%>`的区别——这两中方式都可以嵌入Rails代码，不同的是，前一个仅仅是执行代码，而后一种则是将返回值嵌入html代码中。
+
 ##附 Rails路由器入门
 <http://guides.ruby-china.org/routing.html>
 ##学会使用api，学会读文档

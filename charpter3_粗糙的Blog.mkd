@@ -196,19 +196,20 @@ HTTP-GET以使用MIME类型application/x-www-form-urlencoded的urlencoded文本�
 
 >>在`localhost:3000`页面下点击edit链接，修改一下点击update，搜寻终端下的信息（所谓的“Log”），你应该可以看到如下图的输出：
 
->>![params](./charpter3_params)
+>>![params](./charpter3_params.png)
 
 >我们可以看到，params中是一个map，是一组像这样的值——`"key"->value`，在controller中，我们通过`params[:key]`这样的形式就可以相应的value值。
 
->2）form：form的中文翻译是表单，是http默认的提交数据的形式，它和post的关系可以这样理解——post是方式，form是形式。或者说，form构建了post的key值，以及对应的value的变量类型。form的作用同时还体现在它提供了一些前端形式，比如
+>2）form：form的中文翻译是表单，是http默认的提交数据的形式，它和post的关系可以这样理解——post是方式，form是形式。或者说，form构建了post的key值，以及对应的value的变量类型。form的作用同时还体现在它提供了一些前端形式，如下表：
 
 ><div>
-><h2>表单标签</h2>
-><table class="dataintable">
-><tbody><tr>
+><table class="table table-bordered table-striped">
+><thead><tr>
 ><th>标签</th>
 ><th>描述</th>
 ></tr>
+></thead>
+><tbody>
 ><tr>
 ><td><a href="/tags/tag_form.asp">&lt;form&gt;</a></td>
 ><td>定义供用户输入的表单</td>
@@ -252,9 +253,7 @@ HTTP-GET以使用MIME类型application/x-www-form-urlencoded的urlencoded文本�
 ></tbody></table>
 ></div>
 
->
->
->
+OK，让我们看看Rails构建form的两种形式：`form_for`和`form_tag`
 
 ##附 Rails路由器入门
 <http://guides.ruby-china.org/routing.html>

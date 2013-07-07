@@ -202,6 +202,7 @@ HTTP-GET以使用MIME类型application/x-www-form-urlencoded的urlencoded文本�
 
 >2）form：form的中文翻译是表单，是http默认的提交数据的形式，它和post的关系可以这样理解——post是方式，form是形式。或者说，form构建了post的key值，以及对应的value的变量类型。form的作用同时还体现在它提供了一些前端形式，如下表：
 
+<center>
 ><div>
 ><table class="table table-bordered table-striped">
 ><thead><tr>
@@ -252,8 +253,57 @@ HTTP-GET以使用MIME类型application/x-www-form-urlencoded的urlencoded文本�
 ></tr>
 ></tbody></table>
 ></div>
+<center>
 
-OK，让我们看看Rails构建form的两种形式：`form_for`和`form_tag`
+>OK，让我们看看Rails构建form的两种形式：`form_for`和`form_tag`。
+
+>a. form_for：这个函数我们可以在`/app/views/articles/_form.html.erb`中看到：
+
+	<%= form_for(@article) do |f| %>
+	  <% if @article.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+	      <ul>
+	      <% @article.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+	  <div class="field">
+	    <%= f.label :name %><br />
+	    <%= f.text_field :name %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :content %><br />
+	    <%= f.text_area :content %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit %>
+	  </div>
+	<% end %>
+
+>简单的说，form_for以一个model的实例为参数，可以以一种更简便的形式创建form，这里的for并不是指”循环“，而是类似于”对于“的意思。比如，`<%= form_for(@article) do |f| %>`这句可以理解为”对于@article这个变量，根据其属性构建form“，这里的`|f|`是一个临时变量，可以查阅Ruby的语法找到答案。在执行的时候，Rails会对其进行翻译，我们用Chrome打开`http://localhost:3000/articles/new`这个地址，右键点击”审察元素“，我们可以看到这样的一段：
+
+	<form accept-charset="UTF-8" action="/articles" class="new_article" id="new_article" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="jad5Zmxsc4f+EgnUczlccO6Edd4KvkgX6JQ6zoEtwy8="></div>
+
+	  <div class="field">
+	    <label for="article_name">Name</label><br>
+	    <input id="article_name" name="article[name]" size="30" type="text">
+	  </div>
+	  <div class="field">
+	    <label for="article_content">Content</label><br>
+	    <textarea cols="40" id="article_content" name="article[content]" rows="20"></textarea>
+	  </div>
+	  <div class="actions">
+	    <input name="commit" type="submit" value="Create Article">
+	  </div>
+	</form>
+>这就是上面的一段代码翻译成的html代码，可以看成是一一对应关系，比如`form_for`语句被翻译成`<form>`标签，`f.label`被翻译成`<label>`属性，`f.text_fied`被翻译成`<input>`标签。而其中`:name`这样的结构是Rails使用的map形式，
+
+>b. form_tag：form_tag与form_for的区别是，form_for只能根据已存在的model构建form，而form_tag却可以任意地构建form提交数据。所以在常规的对于单一的model实例进行呈现或者修改时倾向于采用form_for，其他情况倾向于采用form_tag。
 
 ##附 Rails路由器入门
 <http://guides.ruby-china.org/routing.html>

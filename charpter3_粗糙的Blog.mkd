@@ -171,6 +171,37 @@ Active Record可以支持的变量类型有以下几种。
 
 需要解释的是`<%%>`和`<%=%>`的区别——这两中方式都可以嵌入Rails代码，不同的是，前一个仅仅是执行代码，而后一种则是将返回值嵌入html代码中。
 
+####update函数
+
+index函数只是把数据从Controller传送到View，那么如何从View将数据传送回Controller呢？从View将数据传回Controller并不是简单的通过全局变量就可以，因为Controller是后台部分，而View却只是前段部分，数据传递并非实时的（可以模拟实现，比如Ajax，我们会用专门的一章来讲解），事实上，全局变量的值只是在网页最开始呈现时完成的传递，如果我们想在之后进行传递，我们需要了解http向服务器“发送”数据（称之为“交互”）的两种基本方法——post或get。
+
+HTTP-GET和HTTP-POST是使用HTTP的标准协议动词，用于编码和传送变量名/变量值对参数，并且使用相关的请求语义。每个HTTP-GET和HTTP-POST都由一系列HTTP请求头组成，这些请求头定义了客户端从服务器请求了什么，而响应则是由一系列HTTP应答头和应答数据组成，如果请求成功则返回应答。
+
+HTTP-GET以使用MIME类型application/x-www-form-urlencoded的urlencoded文本的格式传递参数。Urlencoding是一种字符编码，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是"%20"。附加参数还能被认为是一个查询字符串。
+　　与HTTP-GET类似，HTTP-POST参数也是被URL编码的。然而，变量名/变量值不作为URL的一部分被传送，而是放在实际的HTTP请求消息内部被传送。他们的区别如下：
+
+>1）get是从服务器上获取数据，post是向服务器传送数据。
+
+>2）   在客户端，Get方式在通过URL提交数据，数据在URL中可以看到；POST方式，数据放置在HTML HEADER内提交。
+
+>3） 对于get方式，服务器端用Request.QueryString获取变量的值，对于post方式，服务器端用Request.Form获取提交的数据。
+
+>4）   GET方式提交的数据最多只能有1024字节，而POST则没有此限制。
+
+>5）   安全性问题。正如在（1）中提到，使用 Get 的时候，参数会显示在地址栏上，而 Post 不会。所以，如果这些数据是中文数据而且是非敏感数据，那么使用 get；如果用户输入的数据不是中文字符而且包含敏感数据，那么还是使用 post为好
+
+好了，官方的话说完了，让我们解释几个曾经在学习Rails之初困扰笔者的几个东西：
+
+>1）params：我们可以看到，在articles_controller的update中，我们用到了一个变量——params。这是Html在发送post的时候默认的容器（请允许我先用容器去形容它），这是一个字典（哈希，散列，map，whatever），有一个方法可以看到这个变量的形式：
+>>我们将articles_controller中update函数改个名字（其实只要删除一个字母让它不叫update就行），然后我们在`localhost:3000`页面下点击edit链接，修改一下点击update，好的，我们看到了页面上的提示。（也可以用命令行直接看）。
+
+>我们可以看到，params中是一个map，是一组像这样的值——`"key"->value`，在controller中，我们通过`params[:key]`这样的形式就可以相应的value值。
+
+>2）form：form的中文翻译是表单，是http默认的提交数据的形式，它和post的关系可以这样理解，
+>
+>
+>
+
 ##附 Rails路由器入门
 <http://guides.ruby-china.org/routing.html>
 ##学会使用api，学会读文档

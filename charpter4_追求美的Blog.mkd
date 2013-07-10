@@ -1,0 +1,21 @@
+<center>四. 追求美的Blog<center>
+----
+*（为什么讲了一点点功能就开始说前端美化呢？因为我个人认为一个网站的好与坏取决于两方面：性能与界面，当然这里的界面不仅仅指所看到的东西，还指操作逻辑，扯远了。我觉得迅速给读者带来美的体验是一个网站开发教程不可或缺的，只有最快的看到自己的成果，读者才能有兴趣继续学习，所以我们先讲如何美化，接下来再说其他功能的补全）*
+
+*（其实这一章所谓的“美化”一定会让前端工作者笑掉大牙的，可惜我们只是可怜的程序员，就先将就一下吧，效果图如下）*
+
+![](./chapter4_final.png)
+
+##1. Rails对CSS和Javascript的支持策略
+
+Rails对于CSS的支持其实很简单，它通过在`/app/assets/stylesheets`声明的各个`.css.scss`文件进行映射达到使用CSS的目的。由于我们仅仅是想使用一些现有的CSS和Javascript库，所以相对简单，不需要太多的步骤。
+
+##2. 使用前段库Bootstrap
+
+Bootstrap是Twitter推出的一个开源的用于前端开发的工具包。它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap的代码可以在[这里](http://twitter.github.io/bootstrap/)下载到，在[这里](http://www.bootcss.com)可以看到它的中文指导。
+
+下载完毕之后，解压，进入bootstrap文件夹，你应该可以看到三个文件夹，分别是`css`、`img`和`js`，分别将其中的`bootstrap.css` `glyphicons-halflings.png`和`bootstrap.js`拷贝到`/app/asset/stylesheets`、`/app/asset/images`、`/app/asset/javascripts`下，ok，可以使用了~
+
+打开`/app/views/articles/`
+
+##3. 一些误区与矛盾

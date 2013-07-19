@@ -49,7 +49,7 @@ _**数据库：MySQL**_
 	rails server
 
 搞定之后打开浏览器，在地址栏输入`localhost:3000`，你如果看到下面这样的网页，那么恭喜，你已经成功运行了第一个Rails网站，虽然它现在有点弱小，但总会强大起来的。
-![alert aaa](./charpter2_default_index.png)
+![alert aaa](./images/charpter2_default_index.png)
 
 
 

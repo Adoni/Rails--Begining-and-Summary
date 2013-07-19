@@ -21,7 +21,7 @@
 ##2. MVC模型
 所谓MVC模型，也就是Model-View-Controller模型。是为了简易开发而约定的一套开发规范，被Rails作为其框架基础。MVC模型如下图所示：
 
-![](./charpter3_MVC.png)
+![](./images/charpter3_MVC.png)
 
 Model（模型）：模型可以理解为对于数据的定义，以及数据的关系。
 
@@ -79,11 +79,11 @@ Active Record可以支持的变量类型有以下几种。
 
 在浏览器中输入`localhost:3000/articles/new`，你会看到一个article的编辑界面，如下图：
 
-![](./charpter3_article_new.png)
+![](./images/charpter3_article_new.png)
 
 随便输入一些内容，点击保存，OK，你已经可以看到你的第一篇日志了，如下图：
 
-![](./charpter3_show_first_article.png)
+![](./images/charpter3_show_first_article.png)
 
 是不是有一种创世的感觉？
 
@@ -160,7 +160,7 @@ Active Record可以支持的变量类型有以下几种。
     
 首先是一个标题。然后是一个表格，表格的第一行是article的两个属性，之后的每一行分别是articles中每一篇article的属性值，你看到的界面也许是这样的：
 
-![](./charpter3_index.png)
+![](./images/charpter3_index.png)
 
 需要注意的是这两句代码以及其中间的内容：
 
@@ -196,7 +196,7 @@ HTTP-GET以使用MIME类型application/x-www-form-urlencoded的urlencoded文本�
 
 >>在`localhost:3000`页面下点击edit链接，修改一下点击update，搜寻终端下的信息（所谓的“Log”），你应该可以看到如下图的输出：
 
->>![params](./charpter3_params.png)
+>>![params](./images/charpter3_params.png)
 
 >我们可以看到，params中是一个map，是一组像这样的值——`"key"->value`，在controller中，我们通过`params[:key]`这样的形式就可以相应的value值。
 
@@ -255,7 +255,9 @@ HTTP-GET以使用MIME类型application/x-www-form-urlencoded的urlencoded文本�
 ></div>
 <center>
 
->OK，让我们看看Rails构建form的两种形式：`form_for`和`form_tag`。
+一旦有了form，浏览器就知道在这里需要它做一些发送数据的操作了。
+
+>好了，让我们看看Rails构建form的两种形式：`form_for`和`form_tag`。
 
 >a. form_for：这个函数我们可以在`/app/views/articles/_form.html.erb`中看到：
 
@@ -304,5 +306,8 @@ HTTP-GET以使用MIME类型application/x-www-form-urlencoded的urlencoded文本�
 
 >b. form_tag：form_tag与form_for的区别是，form_for只能根据已存在的model构建form，而form_tag却可以任意地构建form提交数据。所以在常规的对于单一的model实例进行呈现或者修改时倾向于采用form_for，其他情况倾向于采用form_tag。
 
+这样，通过这样的代码我们就构造出了相应的form，每一个具有action属性的form都可以做一些事情，这个过程是Rails自己完成的。但是需要注意的是，也许有的form翻译成html代码会和我们原本预想的有所区别，这个问题我们会在第四章遇到并做一些讨论。
+
+##6. 关于view，
 ##附 Rails路由器入门
 请点击[这里](http://guides.ruby-china.org/routing.html)。

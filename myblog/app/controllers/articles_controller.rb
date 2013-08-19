@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
 
     respond_to do |format|
       format.html # index.html.erb

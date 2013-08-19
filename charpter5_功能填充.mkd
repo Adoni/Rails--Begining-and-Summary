@@ -1,0 +1,17 @@
+<center>五. 功能填充<center>
+*OK，上一章我们讲了一些美化的问题，主要是CSS和Javascript在Rails当中的用法以及Bootstrap的引入。这一章，我们需要：*
+
+*添加类别、标签
+*实现用户登录，了解session
+*几个重要的rake，一对多数据库模型
+*添加搜索、收藏
+*重要的回顾，不一样的发现
+
+##1. 添加类别与标签
+
+*我们在第二章中曾经规划过我们的blog应该有哪些功能，请回顾[这里](./charpter3_粗糙的Blog.mkd)。现在，我们就来实现类别（category）和标签（label）功能。*
+
+###类别
+rails generate model category name:string
+rails generate controller new create
+###标签

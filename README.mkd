@@ -33,11 +33,11 @@ README
 * 添加搜索、收藏
 * 重要的回顾，不一样的发现
 
-##charpter5 外部程序的引入
+##charpter6 外部程序的引入
 * Markdown编辑器的引入。
 * 播放器的引入
 
-##charpter6 安全问题
+##charpter7 安全问题
 
 ##附录
 * rake 命令大全
